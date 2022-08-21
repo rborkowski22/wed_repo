@@ -1,0 +1,1 @@
+INSERT INTO IMAGE (NAME, ORDER_NUMBER) VALUES ('first name', 1);
