@@ -28,7 +28,12 @@ public class Image {
     @Column(name = "ORDER_NUMBER")
     private Long order;
 
+    public Image() {
+    }
 
-
-
+    public Image(String name, byte[] photo, Long order) {
+        this.name = name;
+        this.photo = photo;
+        this.order = order;
+    }
 }
