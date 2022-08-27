@@ -22,18 +22,19 @@ public class Image {
     private String name;
 
     @Lob
-    @Column(name = "PHOTO", columnDefinition = "BLOB")
+    @Column(name = "PHOTO", columnDefinition = "MEDIUMBLOB")
     private byte[] photo;
 
     @Column(name = "ORDER_NUMBER")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long order;
 
-    public Image() {
+    protected Image() {
+        //for Hibernate
     }
 
-    public Image(String name, byte[] photo, Long order) {
+    public Image(String name, byte[] photo) {
         this.name = name;
         this.photo = photo;
-        this.order = order;
     }
 }

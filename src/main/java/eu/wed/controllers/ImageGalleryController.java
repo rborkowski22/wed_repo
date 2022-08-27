@@ -8,14 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ImageGalleryController {
@@ -32,7 +29,7 @@ public class ImageGalleryController {
 
     @GetMapping({"/test"})
     public String test() {
-        Image image = new Image("testName", null, 1L);
+        Image image = new Image("testName", null);
         this.imageRepository.save(image);
         return "test";
     }
@@ -43,15 +40,15 @@ public class ImageGalleryController {
     }
 
     @PostMapping("upload")
-    public @ResponseBody ResponseEntity<?> uploadFiles(final @RequestParam("image") MultipartFile file) {
+    public @ResponseBody ResponseEntity<?> uploadFiles(final @RequestParam("files") MultipartFile[] files) {
         try {
-            String filename = file.getOriginalFilename();
-            byte[] imageData = file.getBytes();
-            Image image = new Image(filename, imageData, 0L);
-            this.imageRepository.save(image);
-
-            //TODO implement
-            log.info("***** uploading image");
+            for (MultipartFile file: files) {
+                String filename = file.getOriginalFilename();
+                byte[] imageData = file.getBytes();
+                Image image = new Image(filename, imageData);
+                this.imageRepository.save(image);
+                log.info("Image with name " + filename + " uploaded successfully");
+            }
             return new ResponseEntity<>("Files saved", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
