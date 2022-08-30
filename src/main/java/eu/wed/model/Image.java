@@ -26,7 +26,6 @@ public class Image {
     private byte[] photo;
 
     @Column(name = "ORDER_NUMBER")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long order;
 
     protected Image() {
