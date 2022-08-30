@@ -5,32 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="/css/style.css">-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <br>
 <h1 class="text-center">Dodaj zdjęcia do galerii</h1>
-<div class="container text-center">
-    <a href="/index" style="float:left;" class="btn btn-success">Przejdź do galerii</a>
+<div class="container d-flex col-4 justify-content-center text-center">
+    <a href="/index" class="btn btn-success">Przejdź do galerii</a>
 </div>
 <div class="contact py-sm-5">
     <div class="container py-xl-4 py-lg-2">
         <form id="form">
             <div class="contact-grids1 w3agile-6">
                 <div class="row">
-                    <!--<div class="contact-form1 form-group">
-                        <label for="name" class="col-form-label">Nazwa</label>
-                        <input type="text" class="form-control" placeholder="Name" id="name" name="name"
-                               required="required">
-                        <p id="error_name"></p>
-                    </div>-->
                     <div class="contact-form1 form-group">
                         <label for="image" class="col-form-label">Plik</label>
                         <input type="file"
+                               multiple
                                class="form-control"
-                               placeholder="" id="image" name="image"
+                               placeholder="" id="image" name="files"
                                required="required" accept=".png,.jpg,.jpeg">
                         <p id="error_file"></p>
                     </div>
