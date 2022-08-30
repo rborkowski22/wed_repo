@@ -10,7 +10,22 @@
 </head>
 <body>
     <br>
-    <h1>Image Gallery</h1>
-    <p>It's working!!</p>
+    <h1 class="text-center">Image Gallery</h1>
+    <br>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th th:text="No."/>
+                <th th:text="Foto"/>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="image: ${images}">
+                <td th:text="${image.order_number}"/>
+                <td><img class="img-fluid" style="max-width: 500px" th:src="${'data:image/jpeg;base64,'+ image.generateBase64Image()}" alt=""></td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
 </html>
