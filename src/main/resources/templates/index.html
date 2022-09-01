@@ -9,23 +9,32 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css">
 </head>
 <body>
-    <br>
-    <h1 class="text-center">Image Gallery</h1>
-    <br>
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th th:text="No."/>
-                <th th:text="Foto"/>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="image: ${images}">
-                <td th:text="${image.order_number}"/>
-                <td><img class="img-fluid" style="max-width: 500px" th:src="${'data:image/jpeg;base64,'+ image.generateBase64Image()}" alt=""></td>
-            </tr>
-        </tbody>
-    </table>
+<br>
+<h1 class="text-center">Image Gallery</h1>
+<br>
+<table class="table table-responsive">
+    <thead>
+    <tr>
+        <th th:text="No."/>
+        <th th:text="Foto"/>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="image: ${imagesPage.getContent()}">
+        <td th:text="${image.order_number}"/>
+        <td>
+            <img class="img-fluid" style="max-width: 500px"
+                 th:src="${'data:image/jpeg;base64,'+ image.generateBase64Image()}" alt="">
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${imagesPage.totalPages > 0}" class="pagination"
+    th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/index(size=${imagesPage.size}, page=${pageNumber})}"
+    th:text="${pageNumber}"
+    th:class="${pageNumber==imagesPage.number +1 } ? active"/>
+</div>
 
 </body>
 </html>
