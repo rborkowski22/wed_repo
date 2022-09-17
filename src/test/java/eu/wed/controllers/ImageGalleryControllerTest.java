@@ -9,8 +9,6 @@ import mockit.Tested;
 import mockit.Verifications;
 import org.assertj.core.api.Assertions;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.testng.annotations.Test;
 
@@ -32,20 +30,19 @@ public class ImageGalleryControllerTest {
     public void getHomeTest() {
         //given
         Page<Image> imagePage = Page.empty();
-        int page = 2;
-        int size = 12;
+
+        Optional<Integer> pageOptional = Optional.of(2);
+        Optional<Integer> sizeOptional = Optional.of(12);
         new Expectations() {{
-            ImageGalleryControllerTest.this.imageService.getPaginatedImages((Pageable) any);
+            ImageGalleryControllerTest.this.imageService.getPaginatedImagesAndAddToModel(pageOptional,  model);
             this.result = imagePage;
         }};
         //when
-        String result = this.imageGalleryController.getHomePage(this.model, Optional.of(page),Optional.of(size));
+        String result = this.imageGalleryController.getHomePage(this.model, pageOptional);
         //then
         Assertions.assertThat(result).isEqualTo("index");
         new Verifications(){{
-            ImageGalleryControllerTest.this.model.addAttribute(anyString,any);
-            this.times = 2;
-            ImageGalleryControllerTest.this.imageService.getPaginatedImages(PageRequest.of(page-1,size));
+            ImageGalleryControllerTest.this.imageService.getPaginatedImagesAndAddToModel(pageOptional, model);
             this.times =1;
         }};
     }
