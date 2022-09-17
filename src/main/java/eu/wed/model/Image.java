@@ -26,7 +26,7 @@ public class Image {
     @Column(name = "PHOTO", columnDefinition = "MEDIUMBLOB")
     private byte[] photo;
 
-    @Column(name = "order_number")
+    @Column(name = "ORDER_NUMBER")
     public Long order_number;
 
     protected Image() {

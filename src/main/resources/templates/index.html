@@ -34,7 +34,7 @@
         <div th:if="${imagesPage.totalPages > 0}"
              class="pagination d-inline-flex p-2 bd-highlight"
              th:each="pageNumber : ${pageNumbers}">
-            <a th:href="@{/index(size=${imagesPage.size}, page=${pageNumber})}"
+            <a th:href="@{/(page=${pageNumber})}"
                th:text="${pageNumber}"
                th:class="${pageNumber==imagesPage.number +1 } ? active"/>
         </div>

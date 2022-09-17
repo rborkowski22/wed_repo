@@ -1,24 +1,14 @@
 package eu.wed.services;
 
-import eu.wed.model.Image;
-import eu.wed.repositories.ImageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
-@Service
-public class ImageService {
+import java.util.Optional;
 
-    private final ImageRepository imageRepository;
+public interface ImageService {
 
-    @Autowired
-    public ImageService(ImageRepository imageRepository) {
-        this.imageRepository = imageRepository;
-    }
+    void getPaginatedImagesAndAddToModel(Optional<Integer> pageNumber, Model model);
 
-    public Page<Image> getPaginatedImages(Pageable pageable) {
-        return this.imageRepository.findAll(pageable);
-    }
-
+    ResponseEntity<?> uploadFiles(MultipartFile[] files);
 }
