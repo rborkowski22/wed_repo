@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ImageService {
 
+    private final ImageRepository imageRepository;
+
     @Autowired
-    private ImageRepository imageRepository;
+    public ImageService(ImageRepository imageRepository) {
+        this.imageRepository = imageRepository;
+    }
 
     public Page<Image> getPaginatedImages(Pageable pageable) {
         return this.imageRepository.findAll(pageable);
